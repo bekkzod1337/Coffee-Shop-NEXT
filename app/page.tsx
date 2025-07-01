@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 scroll-smooth">
-      <section id="home"><Header active={active} /></section>
+      <section id="home"><Header /></section>
       <section id="about"><AboutSection /></section>
       <section id="menu"><HomeSection /></section>
       <section id="blog"><BlogSection /></section>

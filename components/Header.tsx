@@ -2,7 +2,9 @@
 import Image from 'next/image';
 import { ShoppingCart, User } from 'lucide-react';
 import { motion } from 'framer-motion';
-
+interface HeaderProps {
+  active: string;
+}
 export default function Header() {
   return (
     <header className="relative w-full min-h-screen bg-foreground text-white overflow-hidden">
