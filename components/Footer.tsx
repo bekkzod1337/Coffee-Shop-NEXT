@@ -26,11 +26,11 @@ const Footer = () => {
         className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10"
       >
         {/* LEFT IMAGE */}
-        <motion.div custom={0} variants={fadeUp} className="col-span-1 flex items-center justify-center">
+        <motion.div custom={0} className="col-span-1 flex items-center justify-center">
           <Image src="/coffee-machine.png" alt="Grinder" width={240} height={350} className="object-contain" />
         </motion.div>
 
-        <motion.div custom={1} variants={fadeUp} className="flex flex-col justify-center">
+        <motion.div custom={1} className="flex flex-col justify-center">
           <h4 className="font-semibold mb-4">About</h4>
           <ul className="space-y-2 text-sm">
             <li>Our Story</li>
@@ -39,7 +39,7 @@ const Footer = () => {
           </ul>
         </motion.div>
 
-        <motion.div custom={2} variants={fadeUp} className="flex flex-col justify-center">
+        <motion.div custom={2} className="flex flex-col justify-center">
           <h4 className="font-semibold mb-4">Customer Resources</h4>
           <ul className="space-y-2 text-sm">
             <li>Menu</li>
@@ -48,7 +48,7 @@ const Footer = () => {
           </ul>
         </motion.div>
 
-        <motion.div custom={3} variants={fadeUp} className="flex flex-col justify-center">
+        <motion.div custom={3} className="flex flex-col justify-center">
           <h4 className="font-semibold mb-4">Services</h4>
           <ul className="space-y-2 text-sm">
             <li>Payment Options</li>
@@ -57,7 +57,7 @@ const Footer = () => {
           </ul>
         </motion.div>
 
-        <motion.div custom={4} variants={fadeUp} className="flex flex-col justify-center space-y-3 text-sm">
+        <motion.div custom={4} className="flex flex-col justify-center space-y-3 text-sm">
           <p className="flex items-center gap-2">
             <MapPin size={16} /> 12 Jhon Avenue #35 - New York
           </p>
@@ -77,7 +77,7 @@ const Footer = () => {
 
       <motion.div
         custom={5}
-        variants={fadeUp}
+    
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}

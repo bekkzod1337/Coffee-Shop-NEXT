@@ -35,7 +35,7 @@ export default function HomeSection() {
         >
           <motion.h2
             className="text-center text-3xl md:text-4xl font-semibold italic mb-8"
-            variants={fadeUp}
+            
             custom={0}
           >
             Reserve a Table
@@ -43,7 +43,7 @@ export default function HomeSection() {
           <div className="flex flex-col md:flex-row justify-evenly items-center gap-8  mx-auto">
             <motion.div
               className="w-[430px] h-[470px] relative"
-              variants={fadeUp}
+              
               custom={1}
             >
               <Image
@@ -56,7 +56,7 @@ export default function HomeSection() {
             </motion.div>
             <motion.form
               className="flex flex-col gap-3 w-full max-w-md"
-              variants={fadeUp}
+              
               custom={2}
             >
               <input type="date" placeholder="Date" className="bg-white/90 text-black rounded px-4 py-2" />
@@ -81,7 +81,7 @@ export default function HomeSection() {
         >
           <motion.h2
             className="text-center text-3xl md:text-4xl font-semibold italic mb-10"
-            variants={fadeUp}
+            
             custom={3}
           >
             Recommended
@@ -91,7 +91,7 @@ export default function HomeSection() {
               <motion.div
                 key={i}
                 className="bg-[#a97b56] w-60 rounded-lg overflow-hidden shadow-lg"
-                variants={fadeUp}
+                
                 custom={i + 4}
               >
                 <div className="w-full h-40 relative">
@@ -120,7 +120,7 @@ export default function HomeSection() {
         >
           <motion.h2
             className="text-center text-3xl md:text-4xl font-semibold italic mb-10"
-            variants={fadeUp}
+            
             custom={7}
           >
             Popular Menu
@@ -128,7 +128,7 @@ export default function HomeSection() {
 
           <motion.div
             className="relative w-full h-[600px] max-w-5xl mx-auto"
-            variants={fadeUp}
+            
             custom={8}
           >
             <Image
@@ -142,7 +142,7 @@ export default function HomeSection() {
 
           <motion.div
             className="text-center mt-6"
-            variants={fadeUp}
+            
             custom={9}
           >
             <button className="text-[#f5ede2] border border-[#f5ede2] px-6 py-2 rounded-full hover:bg-[#f5ede2] hover:text-[#1f0f0a] transition">
