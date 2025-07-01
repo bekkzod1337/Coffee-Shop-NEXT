@@ -1,60 +1,93 @@
-import { Coffee } from "lucide-react"
+'use client';
+import Image from 'next/image';
+import { MapPin, Mail, Phone, Linkedin, Instagram, Share2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-export default function Footer({ onNavigate }) {
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.15,
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  }),
+};
+
+const Footer = () => {
   return (
-    <footer className="bg-amber-950 text-amber-200 py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center">
-                <Coffee className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-amber-100">Elza Coffee</h3>
-                <p className="text-xs text-amber-300">Premium Experience</p>
-              </div>
-            </div>
-            <p className="text-amber-300">Crafting exceptional coffee experiences since 2020.</p>
+    <footer className="bg-background text-[#f5d1a1] px-8 pt-16 pb-6">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10"
+      >
+        {/* LEFT IMAGE */}
+        <motion.div custom={0} variants={fadeUp} className="col-span-1 flex items-center justify-center">
+          <Image src="/coffee-machine.png" alt="Grinder" width={240} height={350} className="object-contain" />
+        </motion.div>
+
+        <motion.div custom={1} variants={fadeUp} className="flex flex-col justify-center">
+          <h4 className="font-semibold mb-4">About</h4>
+          <ul className="space-y-2 text-sm">
+            <li>Our Story</li>
+            <li>FAQ</li>
+            <li>Careers</li>
+          </ul>
+        </motion.div>
+
+        <motion.div custom={2} variants={fadeUp} className="flex flex-col justify-center">
+          <h4 className="font-semibold mb-4">Customer Resources</h4>
+          <ul className="space-y-2 text-sm">
+            <li>Menu</li>
+            <li>Locations</li>
+            <li>Support</li>
+          </ul>
+        </motion.div>
+
+        <motion.div custom={3} variants={fadeUp} className="flex flex-col justify-center">
+          <h4 className="font-semibold mb-4">Services</h4>
+          <ul className="space-y-2 text-sm">
+            <li>Payment Options</li>
+            <li>Refunds & Exchanges</li>
+            <li>Limitation Of Liability</li>
+          </ul>
+        </motion.div>
+
+        <motion.div custom={4} variants={fadeUp} className="flex flex-col justify-center space-y-3 text-sm">
+          <p className="flex items-center gap-2">
+            <MapPin size={16} /> 12 Jhon Avenue #35 - New York
+          </p>
+          <p className="flex items-center gap-2">
+            <Mail size={16} /> Elizacoffee@Coffee.Com
+          </p>
+          <p className="flex items-center gap-2">
+            <Phone size={16} /> 1-222-34-ELIZA
+          </p>
+          <div className="flex items-center gap-4 mt-4">
+            <Linkedin size={18} />
+            <Share2 size={18} />
+            <Instagram size={18} />
           </div>
-          <div>
-            <h4 className="text-lg font-semibold text-amber-100 mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {["Home","Menu","Services","Product","Blog","Contact"].map((l)=>(
-                <li key={l}>
-                  <button onClick={()=>onNavigate(l.toLowerCase())} className="hover:text-amber-100 transition-colors">{l}</button>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold text-amber-100 mb-4">Services</h4>
-            <ul className="space-y-2 text-amber-300">
-              {["Dine-in Experience","Takeaway Orders","Coffee Catering","Barista Training","Private Events"].map((s)=>(
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold text-amber-100 mb-4">Follow Us</h4>
-            <div className="flex gap-4 mb-6">
-              {["F","I","T"].map((s)=>(
-                <button key={s} className="w-10 h-10 bg-amber-800 rounded-full flex items-center justify-center hover:bg-amber-700 transition-colors">
-                  <span className="text-sm font-bold">{s}</span>
-                </button>
-              ))}
-            </div>
-            <h5 className="text-amber-100 font-semibold mb-2">Newsletter</h5>
-            <div className="flex gap-2">
-              <input type="email" placeholder="Your email" className="flex-1 px-3 py-2 rounded bg-amber-800 text-amber-100 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-600" />
-              <button className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 transition-colors">Subscribe</button>
-            </div>
-          </div>
-        </div>
-        <div className="border-t border-amber-800 pt-8 text-center">
-          <p className="text-amber-400">© 2025 Elza Coffee. All rights reserved. Made with ❤️ and lots of coffee.</p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        custom={5}
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="text-center text-xs mt-10 border-t border-[#5e4034] pt-4"
+      >
+        <a href='https://t.me/iam_brand'>Created By Bekzod</a>
+        <p>Copyright ©2025 Eliza Coffee. All Rights Reserved.</p>
+      </motion.div>
     </footer>
-  )
-}
+  );
+};
+
+export default Footer;

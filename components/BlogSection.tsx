@@ -1,6 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { motion } from 'framer-motion';
 
 interface BlogPost {
   id: number;
@@ -10,18 +13,7 @@ interface BlogPost {
   icons: string[];
 }
 
-interface Review {
-  id: number;
-  name: string;
-  avatar: string;
-  rating: number;
-  review: string;
-}
-
 const BlogSection: React.FC = () => {
-  const [currentReview, setCurrentReview] = useState(0);
-  const [email, setEmail] = useState('');
-
   const blogPosts: BlogPost[] = [
     {
       id: 1,
@@ -46,155 +38,91 @@ const BlogSection: React.FC = () => {
     }
   ];
 
-  const reviews: Review[] = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      avatar: "/avatar1.jpg",
-      rating: 5,
-      review: "I love being able to purchase many coffee beans from many countries..."
-    },
-    {
-      id: 2,
-      name: "Mike Chen",
-      avatar: "/avatar2.jpg",
-      rating: 5,
-      review: "Amazing quality coffee beans and fast delivery..."
-    },
-    {
-      id: 3,
-      name: "Emma Wilson",
-      avatar: "/avatar3.jpg",
-      rating: 5,
-      review: "Best coffee subscription service I've tried..."
-    }
-  ];
-
-  const nextReview = () => {
-    setCurrentReview((prev) => (prev + 1) % reviews.length);
-  };
-
-  const prevReview = () => {
-    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Subscribed with email:', email);
-    setEmail('');
-  };
-
   return (
-    <div className="bg-[#4d2c1d] min-h-screen text-white relative overflow-hidden">
-      {/* Background Coffee Bean Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-[#5c3a26] rounded-full" />
-        <div className="absolute top-32 right-20 w-16 h-16 bg-[#7c4f35] rounded-full" />
-        <div className="absolute bottom-20 left-32 w-24 h-24 bg-[#5c3a26] rounded-full" />
-        <div className="absolute bottom-40 right-10 w-12 h-12 bg-[#7c4f35] rounded-full" />
+    <div className="relative text-white overflow-hidden">
+      {/* Background image with blur */}
+      <div className="absolute inset-0 z-0 bg-background">
+        <Image
+          src="/bg2.png"
+          alt="Background"
+          fill
+          className="object-cover opacity-50"
+        />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-16">
-        {/* Blog Section */}
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="relative z-10 container mx-auto px-4 py-20"
+      >
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif italic text-amber-100 mb-12">Our Blog</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-serif italic text-amber-100 mb-12"
+          >
+            Our Blog
+          </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            {blogPosts.map((post) => (
-              <div key={post.id} className="bg-[#5c3a26]/70 rounded-lg p-6 border border-amber-800 hover:bg-[#5c3a26]/90 transition-all duration-300">
-                <h3 className="text-xl font-semibold mb-4 text-amber-100">{post.title}</h3>
-                <p className="text-amber-200 text-sm leading-relaxed mb-6">{post.content}</p>
+          <Swiper
+            spaceBetween={20}
+            loop
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+          >
+            {blogPosts.map((post, i) => (
+              <SwiperSlide key={post.id}>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: i * 0.2 }}
+                  viewport={{ once: true }}
+                  className="bg-[#997D6C] rounded-lg p-6 border border-amber-800 hover:bg-[#5c3a26]/90 transition-all duration-300 h-full"
+                >
+                  <h3 className="text-xl font-semibold mb-4 text-amber-100">{post.title}</h3>
+                  <p className="text-amber-200 text-sm leading-relaxed mb-6">{post.content}</p>
 
-                <div className="flex justify-center space-x-4 mb-4">
-                  {post.icons.map((icon, iconIndex) => (
-                    <div key={iconIndex} className="w-8 h-8 relative">
-                      <Image
-                        src={icon}
-                        alt={`Icon ${iconIndex + 1}`}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <button className="text-text hover:text-amber-100 text-sm font-medium transition-colors">
-                  More
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex justify-center space-x-2 mb-8">
-            {[0, 1, 2].map((dot) => (
-              <div key={dot} className={`w-3 h-3 rounded-full ${dot === 0 ? 'bg-amber-300' : 'bg-amber-600'}`}></div>
-            ))}
-          </div>
-
-          <button className="absolute right-8 top-1/2 transform -translate-y-1/2 text-amber-300 hover:text-amber-100 text-2xl">
-            →
-          </button>
-        </div>
-
-        {/* Review Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif italic text-amber-100 mb-12">Customer Review</h2>
-
-          <div className="relative max-w-2xl mx-auto">
-            <button onClick={prevReview} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-amber-300 hover:text-amber-100 text-2xl z-10">←</button>
-            <button onClick={nextReview} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-amber-300 hover:text-amber-100 text-2xl z-10">→</button>
-
-            <div className="flex items-center justify-center space-x-4">
-              <div className="hidden md:block w-20 h-20 bg-[#5c3a26] rounded-full opacity-50" />
-              <div className="bg-[#5c3a26]/70 rounded-lg p-8 max-w-md border border-amber-800 relative">
-                <div className="text-6xl text-amber-300 absolute top-2 left-4">"</div>
-
-                <div className="flex flex-col items-center mb-6">
-                  <div className="w-16 h-16 rounded-full mb-4 overflow-hidden">
-                    <Image src={reviews[currentReview].avatar} alt={reviews[currentReview].name} width={64} height={64} className="rounded-full object-cover" />
+                  <div className="flex justify-center space-x-4 mb-4">
+                    {post.icons.map((icon, index) => (
+                      <div key={index} className="w-8 h-8 relative">
+                        <Image
+                          src={icon}
+                          alt={`Icon ${index + 1}`}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    ))}
                   </div>
-                  <h4 className="text-lg font-semibold text-amber-100">{reviews[currentReview].name}</h4>
-                </div>
 
-                <div className="flex justify-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-amber-300 text-xl">★</span>
-                  ))}
-                </div>
+                  <button className="text-text hover:text-amber-100 text-sm font-medium transition-colors">
+                    More
+                  </button>
+                </motion.div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-                <p className="text-amber-200 text-sm leading-relaxed italic">
-                  {reviews[currentReview].review}
-                </p>
-              </div>
-              <div className="hidden md:block w-20 h-20 bg-[#5c3a26] rounded-full opacity-50" />
-            </div>
+          <div className="flex justify-center space-x-2 mt-8">
+            {[0, 1, 2].map((dot) => (
+              <div
+                key={dot}
+                className={`w-3 h-3 rounded-full ${
+                  dot === 0 ? 'bg-[#997D6C]' : 'bg-[#997D6C]/70'
+                }`}
+              ></div>
+            ))}
           </div>
         </div>
-
-        {/* Newsletter */}
-        <div className="text-center">
-          <h3 className="text-xl md:text-2xl text-amber-100 mb-6">
-            Subscribe To Our Newsletter, Discounts And Promotions
-          </h3>
-
-          <form onSubmit={handleSubscribe} className="max-w-md mx-auto flex gap-2">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your Email Address"
-              className="flex-1 px-4 py-3 rounded-lg bg-white text-amber-900 placeholder-amber-600 border border-amber-300 focus:outline-none focus:border-amber-500 transition-colors"
-              required
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-amber-700 hover:bg-amber-600 text-white rounded-lg font-medium transition-colors"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

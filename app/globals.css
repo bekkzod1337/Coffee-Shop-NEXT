@@ -26,3 +26,13 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+footer {
+  background-image: url('/Bg footer.png');
+  background-repeat: no-repeat;
+  background-size: cover; /* yoki contain */
+  background-position: center;
+}
+html {
+  scroll-behavior: smooth;
+}
